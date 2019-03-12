@@ -1,0 +1,3 @@
+[submodule "src/microprofile"]
+	path = src/microprofile
+	url = https://github.com/jonasmr/microprofile.git
