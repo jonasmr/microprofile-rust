@@ -4,6 +4,7 @@ fn main(){
 	{
 		cc::Build::new()
 			.file("src/microprofile/microprofile.cpp")
+			.file("src/microprofile/patch_win32.asm")
 			.cpp(true)
 			.define("MICROPROFILE_GPU_TIMERS", "0")
 			.define("MICROPROFILE_DYNAMIC_INSTRUMENT", "1")
@@ -11,6 +12,7 @@ fn main(){
 			.compile("microprofile");
 
 		cc::Build::new()
+			.file("src/microprofile/distorm/src/wstring.c")
 			.file("src/microprofile/distorm/src/mnemonics.c")
 			.file("src/microprofile/distorm/src/textdefs.c")
 			.file("src/microprofile/distorm/src/prefix.c")
@@ -24,6 +26,8 @@ fn main(){
 			.define("DISTORM_STATIC", "1")
 			.define("SUPPORT_64BIT_OFFSET", "1")
 			.compile("distorm");
+		println!("cargo:rustc-link-lib=Shlwapi");
+		println!("cargo:rustc-link-lib=Dbghelp");
 	}
 	else
 	{
@@ -39,6 +43,7 @@ fn main(){
 			.compile("microprofile");
 
 		cc::Build::new()
+			.file("src/microprofile/distorm/src/wstring.c")
 			.file("src/microprofile/distorm/src/mnemonics.c")
 			.file("src/microprofile/distorm/src/textdefs.c")
 			.file("src/microprofile/distorm/src/prefix.c")
