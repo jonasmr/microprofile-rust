@@ -27,6 +27,7 @@ fn main(){
 			.define("SUPPORT_64BIT_OFFSET", "1")
 			.compile("distorm");
 		println!("cargo:rustc-link-lib=Shlwapi");
+		println!("cargo:rustc-link-lib=Shell32");
 		println!("cargo:rustc-link-lib=Dbghelp");
 	}
 	else
