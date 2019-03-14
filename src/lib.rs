@@ -156,7 +156,8 @@ impl Drop for MicroProfileDroppable
 	}
 }
 
-#[macro_export]
+#[cfg(not(feature = "disabled"))]
+#[macro_export] 
 macro_rules! scope {
 	($group_name:expr, $scope_name:expr, $color:expr) => {
 		{
@@ -178,6 +179,91 @@ macro_rules! scope {
 	}
 }
 
+#[cfg(feature = "disabled")]
+#[macro_export] 
+macro_rules! scope {
+	($group_name:expr, $scope_name:expr, $color:expr) => {
+	};
+	($group_name:expr, $scope_name:expr) => {
+	}
+}
+
+
+
+#[cfg(not(feature = "disabled"))]
+#[macro_export] 
+macro_rules! init { () => { $crate::init(); } }
+#[cfg(feature = "disabled")]
+#[macro_export]
+macro_rules! init { () => { } }
+
+#[cfg(not(feature = "disabled"))]
+#[macro_export]
+macro_rules! flip { () => { $crate::flip(); } }
+#[cfg(feature = "disabled")]
+#[macro_export]
+macro_rules! flip { () => { } }
+
+#[cfg(not(feature = "disabled"))]
+#[macro_export]
+macro_rules! shutdown { () => { $crate::shutdown(); } }
+#[cfg(feature = "disabled")]
+#[macro_export]
+macro_rules! shutdown { () => { } }
+
+#[cfg(not(feature = "disabled"))]
+#[macro_export]
+macro_rules! start_auto_flip { ($delay_in_ms:expr) => { $crate::start_auto_flip($delay_in_ms); } }
+#[cfg(feature = "disabled")]
+#[macro_export]
+macro_rules! start_auto_flip { ($delay_in_ms:expr) => { } }
+
+#[cfg(not(feature = "disabled"))]
+#[macro_export]
+macro_rules! stop_auto_flip { () => { $crate::stop_auto_flip(); } }
+#[cfg(feature = "disabled")]
+#[macro_export]
+macro_rules! stop_auto_flip { () => { } }
+
+#[cfg(not(feature = "disabled"))]
+#[macro_export]
+macro_rules! on_thread_exit { () => { $crate::on_thread_exit(); } }
+#[cfg(feature = "disabled")]
+#[macro_export]
+macro_rules! on_thread_exit { () => { } }
+
+
+#[cfg(not(feature = "disabled"))]
+#[macro_export]
+macro_rules! on_thread_create { ($name:expr) => { $crate::on_thread_create($name); } }
+#[cfg(feature = "disabled")]
+#[macro_export]
+macro_rules! on_thread_create { ($name:expr) => { } }
+
+
+#[cfg(not(feature = "disabled"))]
+#[macro_export]
+macro_rules! set_enable_all_groups { ($enabled:expr) => { $crate::set_enable_all_groups($enabled); } }
+#[cfg(feature = "disabled")]
+#[macro_export]
+macro_rules! set_enable_all_groups { ($enabled:expr) => { } }
+
+
+#[cfg(not(feature = "disabled"))]
+#[macro_export]
+macro_rules! dump_file { ($html:expr, $csv:expr, $cpu_spike:expr, $gpu_spike:expr) => { $crate::dump_file($html, $csv, $cpu_spike, $gpu_spike); } }
+#[cfg(feature = "disabled")]
+#[macro_export]
+macro_rules! dump_file { ($html:expr, $csv:expr, $cpu_spike:expr, $gpu_spike:expr) => { } }
+
+
+#[cfg(not(feature = "disabled"))]
+#[macro_export]
+macro_rules! dump_file_immediately { ($html:expr, $csv:expr) => { $crate::dump_file_immediately($html, $csv); } }
+#[cfg(feature = "disabled")]
+#[macro_export]
+macro_rules! dump_file_immediately { ($html:expr, $csv:expr) => { } }
+
 
 #[cfg(test)]
 mod tests {
@@ -197,13 +283,13 @@ mod tests {
 	}
     #[test]
 	fn basic() {
-		crate::init();
-		crate::set_enable_all_groups(true);
-		crate::start_auto_flip(20);
+		crate::init!();
+		crate::set_enable_all_groups!(true);
+		crate::start_auto_flip!(20);
 		run_test();
-		crate::dump_file_immediately("foo.html", "");
-		crate::dump_file_immediately("", "foo.csv");
-		crate::stop_auto_flip();
-		crate::shutdown();
+		crate::dump_file_immediately!("foo.html", "");
+		crate::dump_file_immediately!("", "foo.csv");
+		crate::stop_auto_flip!();
+		crate::shutdown!();
 	}
 }
