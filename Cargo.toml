@@ -1,9 +1,22 @@
 [package]
 name = "microprofile"
-version = "0.0.1"
+version = "0.0.2"
 authors = ["Jonas Meyer <jonas.meyer@gmail.com>"]
 edition = "2018"
 build = "src/build.rs"
+license = "MIT"
+
+description = "microprofile is a small library for profiling and optimizing multithreaded programs."
+keywords = ["profiling", "optimization", "multithreading"]
+categories = ["Development tools", "Concurrency", "Profiling"]
+
+documentation = "https://github.com/jonasmr/microprofile-rust/" 
+repository = "https://github.com/jonasmr/microprofile-rust.git"
+homepage = "https://github.com/jonasmr/microprofile-rust/"
+readme = "README.md"
+
+travis-ci = { repository = "https://github.com/jonasmr/microprofile-rust.git" }
+
 
 [features]
 default = []
