@@ -5,18 +5,27 @@ authors = ["Jonas Meyer <jonas.meyer@gmail.com>"]
 edition = "2018"
 build = "src/build.rs"
 license = "MIT"
+include = [
+	"**/*.rs",
+	"Cargo.toml",
+	"src/microprofile/microprofile.cpp",
+	"src/microprofile/microprofile.h",
+	"src/microprofile/microprofile_html.h",
+	"src/microprofile/patch_osx.s",
+	"src/microprofile/patch_win32.asm",
+	"src/microprofile/distorm/src/*.h",
+	"src/microprofile/distorm/src/*.c",
+	"src/microprofile/distorm/include/*.h",
+]
 
 description = "microprofile is a small library for profiling and optimizing multithreaded programs."
 keywords = ["profiling", "optimization", "multithreading"]
 categories = ["Development tools", "Concurrency", "Profiling"]
-
 documentation = "https://github.com/jonasmr/microprofile-rust/" 
 repository = "https://github.com/jonasmr/microprofile-rust.git"
 homepage = "https://github.com/jonasmr/microprofile-rust/"
 readme = "README.md"
-
 travis-ci = { repository = "https://github.com/jonasmr/microprofile-rust.git" }
-
 
 [features]
 default = []
