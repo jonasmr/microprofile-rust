@@ -17,6 +17,10 @@ extern {
 	fn MicroProfileSetEnableAllGroups(enable : i32);
 	fn MicroProfileOnThreadCreate(pThreadName: *const c_char);
 	fn MicroProfileOnThreadExit();
+	fn MicroProfileTick() -> u64;
+	fn MicroProfileTicksPerSecondCpu() -> i64;
+
+
 }
 
 pub fn init()
@@ -139,6 +143,29 @@ pub fn on_thread_exit()
 	{
 		MicroProfileOnThreadExit();
 	}
+}
+
+pub fn tick() -> u64
+{
+	unsafe
+	{
+		MicroProfileTick()
+	}	
+}
+
+pub fn ticks_per_second_cpu() -> u64
+{
+	unsafe
+	{
+		MicroProfileTicksPerSecondCpu() as u64
+	}
+}
+
+pub fn ticks_to_seconds(ticks : u64) -> f32
+{
+	let per_second = ticks_per_second_cpu();
+	let seconds : f32 = ticks as f32 / per_second as f32;
+	seconds
 }
 
 pub struct MicroProfileDroppable
