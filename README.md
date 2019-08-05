@@ -19,7 +19,7 @@ Which in turn depends on the excellent distorm project
 Add microprofile as a dependency:
 ```
 [dependencies]
-microprofile = "0.0.2"
+microprofile = "0.2.0"
 ```
 
 microprofile is meant to be called from a game engine every frame.
@@ -35,7 +35,7 @@ All of microprofile-rust's functions are available as macros. Use the feature "d
 
 ```
 [dependencies.microprofile]
-version = "0.0.2"
+version = "0.2.0"
 features = ["disabled"]
 ```
 
@@ -54,4 +54,7 @@ Please see the microprofile documentation : https://github.com/jonasmr/microprof
 
 # Example code
 * https://github.com/jonasmr/microprofile-rust-demo
+
+# Updates
+* 0.2.0: Update to microprofile 3.1: Firefox support, quality of life features for programs with -many- threads
 
