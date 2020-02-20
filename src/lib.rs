@@ -202,7 +202,7 @@ macro_rules! scope {
 		let _scope = $crate::MicroProfileDroppable{};
 	};
 	($group_name:expr, $scope_name:expr) => {
-		scope!($group_name, $scope_name, 0);
+		$crate::scope!($group_name, $scope_name, 0);
 	}
 }
 
