@@ -194,7 +194,7 @@ macro_rules! scope {
 				INIT.call_once(||{
 					let group = std::ffi::CString::new($group_name).unwrap();
 					let scope = std::ffi::CString::new($scope_name).unwrap();
-					TOKEN = $crate::MicroProfileGetToken(group.as_ptr(), scope.as_ptr(), $color, 0);;
+					TOKEN = $crate::MicroProfileGetToken(group.as_ptr(), scope.as_ptr(), $color, 0);
 				});
 				$crate::MicroProfileEnter(TOKEN);	
 			}
