@@ -194,7 +194,7 @@ macro_rules! scope {
 				INIT.call_once(||{
 					let group = std::ffi::CString::new($group_name).unwrap();
 					let scope = std::ffi::CString::new($scope_name).unwrap();
-					TOKEN = $crate::MicroProfileGetToken(group.as_ptr(), scope.as_ptr(), $color, 0);;
+					TOKEN = $crate::MicroProfileGetToken(group.as_ptr(), scope.as_ptr(), $color, 0);
 				});
 				$crate::MicroProfileEnter(TOKEN);	
 			}
@@ -202,7 +202,7 @@ macro_rules! scope {
 		let _scope = $crate::MicroProfileDroppable{};
 	};
 	($group_name:expr, $scope_name:expr) => {
-		scope!($group_name, $scope_name, 0);
+		$crate::scope!($group_name, $scope_name, 0);
 	}
 }
 
